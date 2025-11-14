@@ -61,7 +61,7 @@
 </head>
 <body>
   <div class="chat-container">
-    <h2>Geminiとの会話</h2>
+    <h2>ジャヒー様に聞け！</h2>
 
 				<% if (request.getAttribute("message") != null) { %>
       <p style="color: green;"><%= request.getAttribute("message") %></p>

@@ -43,7 +43,7 @@
 </head>
 <body>
   <div class="chat-container">
-    <h2>Geminiに質問してみよう</h2>
+    <h2>ジャヒー様に質問してみよう</h2>
     <form action="ChatServlet" method="post">
       <textarea name="question" rows="5" placeholder="質問を入力してください..."></textarea>
       <input type="submit" value="送信" />
