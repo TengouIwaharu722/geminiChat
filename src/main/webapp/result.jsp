@@ -93,9 +93,30 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background: #005fa3;
 }
-   
-   
-  </style>
+</style>
+<% 
+  Object sentimentObj = request.getAttribute("sentiment");
+  Object scoreObj = request.getAttribute("score");
+  String sentiment = sentimentObj != null ? sentimentObj.toString() : "Neutral";
+  String score = scoreObj != null ? scoreObj.toString() : "0.00";
+
+  
+  String imagePath = "images/jahi_normal.png"; // デフォルト画像
+
+  if ("Very Positive".equals(sentiment)) {
+    imagePath = "images/jahi_laugh.png";
+  } else if ("Positive".equals(sentiment)) {
+    imagePath = "images/jahi_normal.png";
+  } else if ("Neutral".equals(sentiment)) {
+    imagePath = "images/jahi_normal.png";
+  } else if ("Negative".equals(sentiment)) {
+    imagePath = "images/jahi_angly.png";
+  } else if("Very Negative".equals(sentiment)){
+	  	imagePath = "images/jahi_angly2.png";
+  }
+%>
+  
+  
 </head>
 <body>
   <div class="chat-container">
@@ -106,7 +127,7 @@ input[type="submit"]:hover {
     <% } %>
 					
 <div class="message-row">
-  <div class="avatar-column"></div> <!-- 空の顔グラ列 -->
+  <div class="avatar-column"></div> 
   <div class="bubble-column">
     <div class="message user">
       <strong>あなた：</strong><br />
@@ -115,10 +136,9 @@ input[type="submit"]:hover {
   </div>
 </div>
 
-
     <div class="message-row">
   <div class="avatar-column">
-    <img src="images/jahi_normal.png" class="avatar">
+    <img src="<%= imagePath %>" class="avatar">
   </div>
   <div class="bubble-column">
     <div class="message gemini">
@@ -127,11 +147,8 @@ input[type="submit"]:hover {
     </div>
   </div>
 </div>
+<p>感情: <%= sentiment %>（信頼度: <%= score %>）</p>
 
-
-   
-    
-    
     <form action="ChatServlet" method="post">
       <textarea name="question" rows="3" placeholder="質問を入力してください..."></textarea>
       <input type="submit" value="送信" />

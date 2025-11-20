@@ -41,21 +41,29 @@ public class ChatServlet extends HttpServlet {
     // HttpClientでFlask APIにPOST
     HttpClient client = HttpClient.newHttpClient();
     HttpRequest httpRequest = HttpRequest.newBuilder()
-        .uri(URI.create("http://127.0.0.1:5000/chat"))
+        .uri(URI.create("http://127.0.0.1:5000/chat"))		//app.pyの@chatに送る
         .header("Content-Type", "application/json")
         .POST(HttpRequest.BodyPublishers.ofString(json.toString()))
         .build();
 
     try {
+    	//Flaskサーバからのレスポンス
     	HttpResponse<String> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     	// JSONからanswerを抽出
     	JSONObject responseJson = new JSONObject(httpResponse.body());
+    	// 回答
     	String answer = responseJson.getString("answer");
+    	//ラベル
+    	String sentiment = responseJson.optString("sentiment", "不明");
+    	// 評価値
+    	double score = responseJson.optDouble("score", 0.0);
 
     	// JSPに渡す
     	request.setAttribute("answer", answer);
     	request.setAttribute("question", question);
+    	request.setAttribute("sentiment", sentiment);
+    	request.setAttribute("score", score);
     	RequestDispatcher dispatcher = request.getRequestDispatcher("result.jsp");
     	dispatcher.forward(request, response);
 
