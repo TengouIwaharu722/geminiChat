@@ -106,13 +106,13 @@ input[type="submit"]:hover {
   if ("Very Positive".equals(sentiment)) {
     imagePath = "images/jahi_laugh.png";
   } else if ("Positive".equals(sentiment)) {
-    imagePath = "images/jahi_normal.png";
+    imagePath = "images/jahi_angly.png";
   } else if ("Neutral".equals(sentiment)) {
     imagePath = "images/jahi_normal.png";
   } else if ("Negative".equals(sentiment)) {
-    imagePath = "images/jahi_angly.png";
+    imagePath = "images/jahi_angly2.png";
   } else if("Very Negative".equals(sentiment)){
-	  	imagePath = "images/jahi_angly2.png";
+	  	imagePath = "images/jahi_angly3.png";
   }
 %>
   
